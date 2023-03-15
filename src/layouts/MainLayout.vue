@@ -29,7 +29,8 @@
             >
           </q-item-section>
         </q-item>
-        <q-item clickable rel="noopener" to="/manager" v-if="loggedIn">
+        <!-- <q-item clickable rel="noopener" to="/manager" v-if="loggedIn"> -->
+        <q-item clickable rel="noopener" to="/manager">
           <q-item-section avatar>
             <q-icon name="code" />
           </q-item-section>
@@ -39,7 +40,8 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable rel="noopener" to="/timetable" v-if="loggedIn">
+        <!-- <q-item clickable rel="noopener" to="/timetable" v-if="loggedIn"> -->
+        <q-item clickable rel="noopener" to="/timetable">
           <q-item-section avatar>
             <q-icon name="chat" />
           </q-item-section>
@@ -49,7 +51,9 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable rel="noopener" to="/courses" v-if="loggedIn">
+        <!-- <q-item clickable rel="noopener" to="/courses" v-if="loggedIn"> -->
+        <q-item clickable rel="noopener" to="/courses">
+
           <q-item-section avatar>
             <q-icon name="rss_feed" />
           </q-item-section>
@@ -59,7 +63,9 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable rel="noopener" to="/announcements" v-if="loggedIn">
+        <!-- <q-item clickable rel="noopener" to="/announcements" v-if="loggedIn"> -->
+        <q-item clickable rel="noopener" to="/announcements">
+
           <q-item-section avatar>
             <q-icon name="record_voice_over" />
           </q-item-section>

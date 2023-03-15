@@ -11,7 +11,7 @@ export default {
     return {
       timesOnSupa: [],
       tutorsOnSupa: [],
-      tutorsOnSupaJSON: [],
+      timesOnSupaJSON: [],
       courseDurations: [],
       tutorOption: tutor => `${tutor.name} (ID: ${tutor.id})`,
       timeDetails: {},
@@ -109,7 +109,7 @@ export default {
       this.timeDetails = time
       // Assign the time object to the plain JavaScript object timeDetails
       this.originalTime = JSON.parse(JSON.stringify(time));
-      this.tutorsOnSupaJSON = JSON.parse(JSON.stringify(this.timesOnSupa));
+      this.timesOnSupaJSON = JSON.parse(JSON.stringify(this.timesOnSupa));
       const btn = event.target;
       btn.style.display = 'none'
       const tr = btn.parentElement;
@@ -223,10 +223,12 @@ export default {
       let tutorId
       let startTime
       let startDate
-
-      for (let t of this.tutorsOnSupaJSON) {
-        if (t.tutor_id === Number(tr.querySelector('#tutor').value) &&
-            t.time === tr.querySelector('#time').value) {
+      for (let t of this.timesOnSupaJSON) {
+        if (t.tutor_id == Number(tr.querySelector('#tutor').value) &&
+            t.time.substring(0, 5) == tr.querySelector('#time').value.substring(0, 5) && 
+            ((tr.querySelector('#start_date').value != this.originalTime.start_date && 
+            tr.querySelector('#time').value.substring(0, 5) != this.originalTime.time.substring(0, 5) && 
+            Number(tr.querySelector('#tutor').value) != this.originalTime.tutor_id))) {
           let dates = []
           let classes = 7 * t.course.duration - 7
           for (let i = 0; i <= classes; i = i + 7) {
@@ -239,8 +241,12 @@ export default {
             console.log(dates)
             count ++
             startDate = t.start_date
-            tutor = t.tutor.name
             tutorId = t.tutor_id
+            for (let t of this.tutorsOnSupa) {
+              if (t.id === tutorId) {
+                tutor = t.name
+              }
+            }
             startTime = t.time
           }
         }
@@ -252,24 +258,31 @@ export default {
             let dateStr = dateObj.toISOString().slice(0, 10);
             dates.push(dateStr)
           }
-      for (let t of this.tutorsOnSupaJSON) {
-         if (t.tutor_id === Number(tr.querySelector('#tutor').value) &&
-            t.time === tr.querySelector('#time').value) {
+      for (let t of this.timesOnSupaJSON) {
+         if (t.tutor_id == Number(tr.querySelector('#tutor').value) &&
+            t.time.substring(0, 5) == tr.querySelector('#time').value.substring(0, 5) && 
+            ((tr.querySelector('#start_date').value != this.originalTime.start_date && 
+            tr.querySelector('#time').value.substring(0, 5) != this.originalTime.time.substring(0, 5) && 
+            Number(tr.querySelector('#tutor').value) != this.originalTime.tutor_id))) {
               if (dates.includes(t.start_date)) {
                 count++
                 startDate = t.start_date
-                tutor = t.tutor.name
                 tutorId = t.tutor_id
                 startTime = t.time
+                for (let t of this.tutorsOnSupa) {
+                  if (t.id === tutorId) {
+                    tutor = t.name
+                  }
+                }
               }
             }
       }
       
-      if ((tr.querySelector('#start_date').value == this.originalTime.start_date && 
-            tr.querySelector('#time').value == this.originalTime.time && 
-            Number(tr.querySelector('#tutor').value) == this.originalTime.tutor_id)) {
-              count --
-            }
+      // if ((tr.querySelector('#start_date').value == this.originalTime.start_date && 
+      //       tr.querySelector('#time').value == this.originalTime.time && 
+      //       Number(tr.querySelector('#tutor').value) == this.originalTime.tutor_id)) {
+      //         count --
+      //       }
       if (count > 0) {
         time.start_date = this.originalTime.start_date
         time.time = this.originalTime.time

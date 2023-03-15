@@ -70,7 +70,8 @@ function _submitForm() {
   emit();
 }
 
-async function _handleActiveStatus(tutorID, currentStatus) {
+async function _handleActiveStatus(tutorID, currentStatus, event) {
+  event.preventDefault()
   const { data, error } = await supabase
     .from("tutors")
     .update({ active: !currentStatus })
@@ -147,7 +148,8 @@ async function _handleActiveStatus(tutorID, currentStatus) {
             />
             <q-btn
               icon="delete"
-              @click="_handleActiveStatus(tutor.id, tutor.active)"
+              :to="{}"
+              @click="_handleActiveStatus(tutor.id, tutor.active , $event)"
             />
           </q-item-section>
         </q-item>
