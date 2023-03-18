@@ -501,6 +501,10 @@ v-btn {
   cursor: pointer;
 }
 
+.bg-blue-8:hover {
+  background-color: darkblue !important;
+}
+
 #edit, #delete, #confirmEdit, #cancelEdit, #createTime, #cancelCreate {
   font-size: large;
   cursor: pointer;
